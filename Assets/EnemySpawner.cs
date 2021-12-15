@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public List<GameObject> Enemies;
+
+    public GameObject EnemyPrefab;
     public int numEnemies;
     public float EnemySpawnTime;
 
@@ -38,23 +40,17 @@ public class EnemySpawner : MonoBehaviour
     GameObject CreateEnemy(){
         Vector3 min = new Vector3(-10, -10, -10);
         Vector3 max = new Vector3(10, 10, 10);
-        GameObject enemy = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        enemy.name = "Enemy";
-        enemy.tag = "Enemy";
-        
-        enemy.GetComponent<Renderer>().material.SetColor("_Color", Color.red);
-
         Vector3 pos = new Vector3(Random.Range(min.x, max.x), 0, UnityEngine.Random.Range(min.z, max.z));
 
+        // GameObject enemy = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        GameObject enemy = Instantiate(EnemyPrefab, pos, EnemyPrefab.transform.rotation) as GameObject;
+        enemy.name = "Enemy";
+        enemy.tag = "Enemy";
+
+
         enemy.transform.position = pos;
-        enemy.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
         Collider collide = enemy.GetComponent<Collider>();
-        collide.isTrigger = true;
-        Rigidbody rb = enemy.AddComponent<Rigidbody>();
-        rb.isKinematic = false;
-        rb.useGravity = false;
-        rb.freezeRotation = true;
-        rb.constraints = RigidbodyConstraints.FreezePositionY;
+        Rigidbody rb = enemy.GetComponent<Rigidbody>();
 
         
 
@@ -62,6 +58,6 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other){
-                print("ayo");
+            print("ayo");
         }
 }

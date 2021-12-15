@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject bulletFab;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,25 +23,28 @@ public class Player : MonoBehaviour
         // print(input);
         transform.position += moveAmount;
 
+
+        //shoot
         if(Input.GetKeyDown(KeyCode.Space) && velocity.magnitude != 0){
-        GameObject projectile =  GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        projectile.transform.position = transform.position;
-        projectile.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        GameObject projectile =  Instantiate(bulletFab, transform.position, Quaternion.FromToRotation(new Vector3(0, 0, 1), dir));
         Rigidbody rb = projectile.AddComponent<Rigidbody>();
-        rb.detectCollisions = false;
         rb.velocity = dir * 20;
         rb.useGravity = false;
+        print(Quaternion.FromToRotation(new Vector3(0, 0, 1), dir));
         }
 
+        
+        
+    }
         void OnBecameInvisible(){
             Destroy(gameObject);
             print("ayo");
         }
 
         void OnTriggerEnter(Collider other){
-                print("ayo");
+            if(other.gameObject.tag == "Enemy"){
+                Destroy(other.gameObject);
+            }
         }
-        
-        
-    }
+
 }

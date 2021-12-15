@@ -6,10 +6,14 @@ public class Follower : MonoBehaviour
 {
 
     public Transform targetTransform;
+
+    float initialTime;
+
+    public float shootInterval;
     // Start is called before the first frame update
     void Start()
     {
-        
+        initialTime = Time.fixedTime;
     }
 
     float speed = 8;
@@ -22,6 +26,17 @@ public class Follower : MonoBehaviour
         Vector3 moveAmount = velocity * Time.deltaTime;
         if(difference.magnitude > 2){
         transform.position += moveAmount;
+
+        //shoot
+        if(Time.fixedTime - initialTime > shootInterval){
+            CreateBullet();
+        }
+
+    }
+
+    void CreateBullet(){
+        // GameObject bullet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
     }
 
     }
