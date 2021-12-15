@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f30132f4c384367841fdb93601f204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletFab: {fileID: 5954556658059548951, guid: 7e957622cf6fd4cfe939b86c7ef586bd, type: 3}
 --- !u!65 &344043453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278,6 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemies: []
+  EnemyPrefab: {fileID: 6927811506776557488, guid: 461a3941ee0234c19b05d8fa7ecdff4b, type: 3}
   numEnemies: 10
   EnemySpawnTime: 3
 --- !u!4 &413660071
@@ -421,6 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTransform: {fileID: 344043456}
+  shootInterval: 3
 --- !u!135 &734283005
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -429,8 +432,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734283003}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
+  m_IsTrigger: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
