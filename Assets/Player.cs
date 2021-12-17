@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
 
     float speed = 10;
+    public float bullet_speed;
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +21,6 @@ public class Player : MonoBehaviour
         Vector3 dir = input.normalized;
         Vector3 velocity = dir * speed;
         Vector3 moveAmount = velocity * Time.deltaTime;
-        // print(input);
         transform.position += moveAmount;
 
 
@@ -30,16 +30,25 @@ public class Player : MonoBehaviour
         Rigidbody rb = projectile.AddComponent<Rigidbody>();
         rb.velocity = dir * 20;
         rb.useGravity = false;
-        print(Quaternion.FromToRotation(new Vector3(0, 0, 1), dir));
+        }
+
+        if(Input.GetMouseButtonDown(0)){
+            Vector3 mousePos = new Vector3(Input.mousePosition.x, 0, Input.mousePosition.y);
+            Vector3 mouseDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position).normalized;
+
+            print(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+
+            GameObject projectile =  Instantiate(bulletFab, transform.position, Quaternion.FromToRotation(new Vector3(0, 0, 1), mouseDir));
+            Rigidbody rb = projectile.AddComponent<Rigidbody>();
+            rb.velocity = mouseDir * 20;
+            rb.useGravity = false;
         }
 
         
         
     }
-        void OnBecameInvisible(){
-            Destroy(gameObject);
-            print("ayo");
-        }
+
 
         void OnTriggerEnter(Collider other){
             if(other.gameObject.tag == "Enemy"){

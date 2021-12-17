@@ -56,8 +56,4 @@ public class EnemySpawner : MonoBehaviour
 
         return enemy;
     }
-
-    void OnTriggerEnter(Collider other){
-            print("ayo");
-        }
 }
